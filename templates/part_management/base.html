@@ -1,0 +1,109 @@
+{% load static %}
+{% load part_management_extras %}
+
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>{% block title %}{% endblock %}</title>
+
+  <!-- jQuery -->
+  <script src="{% static 'scripts/thirdparty/jquery-2.2.2.min.js' %}"></script>
+
+  <!-- jQuery UI -->
+  <script src="{% static 'scripts/thirdparty/jquery-ui.min.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'styles/jquery-ui.min.css' %}">
+
+  <!-- Bootstrap -->
+  <script src="{% static 'scripts/thirdparty/bootstrap.min.js' %}"></script>
+  <link rel="stylesheet" href="{% static 'styles/bootstrap.min.css' %}">
+
+  <!-- CSS読み込み -->
+  <link rel="stylesheet" href="{% static 'styles/common.css' %}">
+  {% block style %}{% endblock %}
+
+  <!-- JavaScript読み込み -->
+  <script src="{% static 'scripts/common.js' %}"></script>
+  <script src="{% static 'scripts/FileUpload.js' %}"></script>
+  <script src="{% static 'scripts/ProductInfo.js' %}"></script>
+  {% block script %} {% endblock %}
+</head>
+
+<body>
+
+  <div id="wrap">
+    <div class="container">
+
+      <header>
+        <div class="jumbotron">
+          <div class="container-fluid">
+            <span class="h2">部品管理システム</span>
+
+            {% if user.is_authenticated %}
+            <div class="row">
+              <div class="text-right h4 col-sm-10">ログインユーザー：
+                {{ user.user_name }}
+              </div>
+              <div class="text-right h4 col-sm-10">ログイン日時：
+
+                {{ user.last_login|date:"Y/m/d H:i" }}
+
+              </div>
+              <div class="text-right h4 col-sm-10">所属：
+                {{ user.dept_code.dept_name}}
+              </div>
+              <div class="col-sm-2 text-right">
+                <input type="button" class="btn btn-primary" id="logout_btn" value="ログアウト" />
+              </div>
+            </div>
+            {% endif %}
+          </div>
+        </div>
+
+
+        {# メニュー #}
+        {% if user.is_authenticated %}
+        <nav id="gnavi" class="navbar navbar-default">
+          <ul class="dropdown">
+            {% for m in ''|make_menu %}
+            <div class="col-sm-2 text-nowrap">
+              <li>
+                {% if m.child|length == 1 %}
+                {% for s in m.child %}
+              <li><a href="{% url s.url %}">{{ s.name }}</a></li>
+              {% endfor %}
+              {% else %}
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">{{ m.parent }}<b class="caret"></b></a>
+              <ul class="dropdown-menu">
+                {% for s in m.child %}
+                <li><a href="{% url s.url %}">{{ s.name }}</a></li>
+                {% endfor %}
+              </ul>
+              {% endif %}
+              </li>
+            </div>
+            {% endfor %}
+          </ul>
+          {% endif %}
+
+      </header>
+
+      <main>
+        {% block content %}
+        {% endblock %}
+      </main>
+
+      <footer class="well well-sm container-fluid">
+        <small>&copy; 2022 KSW</small>
+      </footer>
+
+    </div>
+    <div id="push"></div>
+  </div>
+
+</body>
+
+</html>

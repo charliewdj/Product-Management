@@ -1,0 +1,135 @@
+{% extends 'part_management/base.html' %}
+{% block title %} 製品情報検索 {% endblock %}
+
+{% block content %}
+<div class="panel panel-info">
+  <div class="panel-heading">製品情報検索</div>
+  <div class="panel-body">
+
+    <form action="{% url 'part_management:ProductInfo' %}" id="search_form" class="form-inline"
+      enctype="multipart/form-data" method="POST">
+      {% csrf_token %}
+      <input type="hidden" id="action_type" name="action_type" value="" />
+
+      <div class="form-inline">
+        <label class="col-sm-2 control-label" for="part_code">販売品目コード</label>
+
+        <input type="text" class="form-control input-sm" name="part_code" id="part_code" value="{{part_code}}">
+
+        <label class="control-label" for="dept_name">担当部門</label>
+        <select class="form-control input-sm" aria-label="Default select example" name="dept_name" id="dept_name">
+
+          <option></option>
+          <option value="部門1">部門 1</option>
+          <option value="部門2">部門 2</option>
+          <option value="部門3">部門 3</option>
+          <option value="部門4">部門 4</option>
+          <option value="D9">無効部門</option>
+        </select>
+
+        <input type="button" class="btn btn-primary" id="clear_dept" value="クリア">
+      </div>
+
+      <br />
+
+
+      <label class="col-sm-2 control-label" for="part_name">販売品目名称</label>
+      <div class="form-inline">
+        <input type="text" class="form-control input-sm" name="part_name" id="part_name" value="{{part_name}}">
+        <label class="control-label" for="user_name">担当者</label>
+        <select class="form-control input-sm" aria-label="Default select example" name="user_name" id="user_name">
+          <option selected></option>
+          <option value="Admin">システム管理者</option>
+          <option value="guest1">guest1</option>
+          <option value="U2">製品管理者</option>
+          <option value="U3">部品管理者</option>
+          <option value="U4">guest2</option>
+          <option value="U5">guest3</option>
+          <option value="U6">役割無効ユーザー</option>
+        </select>
+
+        <input type="button" class="btn btn-primary" id="clear_user" value="クリア">
+      </div>
+
+      <br />
+
+      <label class="col-sm-2 control-label" for="eos_from">EOS</label>
+      <div class="form-inline">
+        <input type="text" class="form-control input-sm date-picker" name="eos_from" id="eos_from" value="{{eos_from}}"
+          placeholder="YYYY/MM/DD">
+        <label class="control-label" for="eos_to">～</label>
+        <input type="text" class="form-control input-sm date-picker" name="eos_to" id="eos_to" value="{{eos_to}}"
+          placeholder="YYYY/MM/DD">
+      </div>
+      <br />
+
+      <div class="form-group">
+        <div class="col-sm-2">&nbsp;</div>
+        <div class="form-inline">
+          <input type="button" class="btn btn-primary" id="search" value="検索">
+        </div>
+      </div>
+
+      {% if error_message %}
+      <br />
+      <div class="alert alert-warning" role="alert">
+        {% autoescape off %}
+        {{ error_message }}
+        {% endautoescape %}
+      </div>
+      {% elif result_data|length > 0 %}
+      <hr />
+      <input type="button" class="btn btn-primary" id="allCheck" value="全選択">
+      <input type="button" class="btn btn-primary" id="allUncheck" value="全解除">
+      <input type="button" class="btn btn-primary" id="apply" value="確定">
+      <br />
+      <div class="table-responsive" style="margin: 10px 0px;">
+
+        <table class="table table-striped table-bordered">
+          <tr>
+            <td>選択</td>
+            <td>販売品目コード</td>
+            <td>販売品目名称</td>
+            <td>担当部門</td>
+            <td>担当者</td>
+            <td>担当者連絡先</td>
+            <td>EOS</td>
+            <td>更新者</td>
+            <td>更新日</td>
+          </tr>
+
+          {% for row in result_data %}
+          <tr>
+            <td>
+              <input type="checkbox" name="applyChk" value="{{forloop.counter}}" />
+            </td>
+            {% for row_item in row %}
+            {% if forloop.counter == 2 %}
+            {% autoescape off %}
+            <td>
+              <input type="text" class="form-control input-sm" name="updSalesItemName" value="{{row_item}}">
+            </td>
+            {% endautoescape %}
+            {% elif forloop.counter == 6 %}
+            <td>
+              <input type="text" class="form-control input-sm date-picker" name="updEos" value="{{row_item|default:''}}"
+                placeholder=" YYYY/MM/DD">
+            </td>
+            {% else %}
+            <td>
+              <div style="white-space: nowrap;">{{ row_item }}</div>
+            </td>
+            {% endif %}
+            {% endfor %}
+
+          </tr>
+          {% endfor %}
+
+        </table>
+      </div>
+    </form>
+    {% endif %}
+
+  </div>
+</div>
+{% endblock %}

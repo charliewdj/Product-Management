@@ -1,0 +1,99 @@
+{% extends 'part_management/base.html' %}
+{% block title %} 製品情報検索 {% endblock %}
+
+{% block content %}
+<div class="panel panel-info">
+  <div class="panel-heading">部品情報検索</div>
+  <div class="panel-body">
+
+    <form action="{% url 'part_management:PartSearch' %}" id="search_form" class="form-inline"
+      enctype="multipart/form-data" method="POST">
+      {% csrf_token %}
+      <input type="hidden" id="action_type" name="action_type" value="" />
+
+      <div class="form-inline">
+        <label class="col-sm-2 control-label" for="part_code">部品目コード</label>
+
+        <input type="text" class="form-control input-sm" name="part_code" id="part_code" value="{{part_code}}">
+
+
+      </div>
+
+      <br />
+
+
+      <label class="col-sm-2 control-label" for="part_name">部品目名称</label>
+      <div class="form-inline">
+        <input type="text" class="form-control input-sm" name="part_name" id="part_name" value="{{part_name}}">
+
+      </div>
+
+
+      <div class="form-group">
+        <div class="col-sm-2">&nbsp;</div>
+        <div class="form-inline">
+          <input type="button" class="btn btn-primary" id="search" value="検索">
+        </div>
+      </div>
+
+      {% if error_message %}
+      <br />
+      <div class="alert alert-warning" role="alert">
+        {% autoescape off %}
+        {{ error_message }}
+        {% endautoescape %}
+      </div>
+      {% elif result_data|length > 0 %}
+      <hr />
+      <input type="button" class="btn btn-primary" id="allCheck" value="全選択">
+      <input type="button" class="btn btn-primary" id="allUncheck" value="全解除">
+      <input type="button" class="btn btn-primary" id="apply" value="確定">
+      <br />
+      <div class="table-responsive" style="margin: 10px 0px;">
+
+        <table class="table table-striped table-bordered">
+          <tr>
+            <td>選択</td>
+            <td>販売品目コード</td>
+            <td>販売品目名称</td>
+            <td>部品タイプ</td>
+            <td>EOL</td>
+            <td>更新者</td>
+            <td>更新日</td>
+          </tr>
+
+          {% for row in result_data %}
+          <tr>
+            <td>
+              <input type="checkbox" name="applyChk" value="{{forloop.counter}}" />
+            </td>
+            {% for row_item in row %}
+            {% if forloop.counter == 2 %}
+            {% autoescape off %}
+            <td>
+              <input type="text" class="form-control input-sm" name="updPartsName" value="{{row_item}}">
+            </td>
+            {% endautoescape %}
+            {% elif forloop.counter == 4 %}
+            <td>
+              <input type="text" class="form-control input-sm date-picker" name="updEol" value="{{row_item|default:''}}"
+                placeholder=" YYYY/MM/DD">
+            </td>
+            {% else %}
+            <td>
+              <div style="white-space: nowrap;">{{ row_item }}</div>
+            </td>
+            {% endif %}
+            {% endfor %}
+
+          </tr>
+          {% endfor %}
+
+        </table>
+      </div>
+    </form>
+    {% endif %}
+
+  </div>
+</div>
+{% endblock %}

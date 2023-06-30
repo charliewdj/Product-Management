@@ -1,0 +1,178 @@
+[
+  {
+    "model": "part_management.Menu",
+    "fields": {
+      "menu_code": "ProductInfo",
+      "menu_name": "製品情報",
+      "menu_seq": 1
+    }
+  },
+  {
+    "model": "part_management.Menu",
+    "fields": {
+      "menu_code": "PartInfo",
+      "menu_name": "部品情報",
+      "menu_seq": 2
+    }
+  },
+  {
+    "model": "part_management.SubMenu",
+    "fields": {
+      "main_menu_code": "ProductInfo",
+      "sub_menu_code": "ProductUpload",
+      "sub_menu_name": "製品情報アップロード",
+      "menu_seq":1
+    }
+  },
+  {
+    "model": "part_management.SubMenu",
+    "fields": {
+      "main_menu_code": "ProductInfo",
+      "sub_menu_code": "ProductInfo",
+      "sub_menu_name": "製品情報検索",
+      "menu_seq":2
+    }
+  },
+  {
+    "model": "part_management.SubMenu",
+    "fields": {
+      "main_menu_code": "PartInfo",
+      "sub_menu_code": "PartUpload",
+      "sub_menu_name": "部品情報アップロード",
+      "menu_seq":1
+    }
+  },
+  {
+    "model": "part_management.SubMenu",
+    "fields": {
+      "main_menu_code": "PartInfo",
+      "sub_menu_code": "PartSearch",
+      "sub_menu_name": "部品情報検索",
+      "menu_seq":2
+    }
+  },
+  {
+    "model": "part_management.Department",
+    "fields":{
+      "dept_code":"D1",
+      "dept_name": "部門1",
+      "invalid": false
+    }
+  },
+  {
+    "model": "part_management.Department",
+    "fields":{
+      "dept_code":"D2",
+      "dept_name": "部門2",
+      "invalid": false
+    }
+  },
+  {
+    "model": "part_management.Department",
+    "fields":{
+      "dept_code":"D3",
+      "dept_name": "部門3",
+      "invalid": false
+    }
+  },
+  {
+    "model": "part_management.Department",
+    "fields":{
+      "dept_code":"D4",
+      "dept_name": "部門4",
+      "invalid": false
+    }
+  },
+  {
+    "model": "part_management.Department",
+    "fields":{
+      "dept_code":"D9",
+      "dept_name": "無効部門",
+      "invalid": true
+    }
+  },
+  {
+    "model":"part_management.User",
+    "fields": {
+      "user_code": "Admin",
+      "user_name": "システム管理者",
+      "password": "pbkdf2_sha256$320000$kr0LZb9ZWWz1FZRcCrNV6A$mXZnEyaaQCWqWFTTaSmXUK/wz4NnfH8aOXdnlPRC44s=",
+      "dept_code": "D1",
+      "role": 9,
+      "effective_start_date":"2016-01-01",
+      "effective_end_date": "2050-12-31"
+    }
+  },
+  {
+    "model":"part_management.User",
+    "fields": {
+      "user_code": "U1",
+      "user_name": "guest1",
+      "password": "pbkdf2_sha256$320000$VWyV3ZE42BYGCnEggrj9c0$o43K17X++DB04ejcJqV+zBx8oYkV7mEtcZlzffbdF4k=",
+      "dept_code": "D1",
+      "role": 1,
+      "effective_start_date":"2016-01-01",
+      "effective_end_date": "2050-12-31"
+    }
+  },
+  {
+    "model":"part_management.User",
+    "fields": {
+      "user_code": "U2",
+      "user_name": "製品管理者",
+      "password": "pbkdf2_sha256$320000$kr0LZb9ZWWz1FZRcCrNV6A$mXZnEyaaQCWqWFTTaSmXUK/wz4NnfH8aOXdnlPRC44s=",
+      "dept_code": "D2",
+      "role": 2,
+      "effective_start_date":"2016-01-01",
+      "effective_end_date": "2050-12-31"
+    }
+  },
+  {
+    "model":"part_management.User",
+    "fields": {
+      "user_code": "U3",
+      "user_name": "部品管理者",
+      "password": "pbkdf2_sha256$320000$UKBGbzFrmRJ4Ky9SLc7K1S$UN5HQRe9aR9v27ahjRs1DfeKUa0fyvJ1vi5UM1i0oW8=",
+      "dept_code": "D3",
+      "role": 3,
+      "effective_start_date":"2016-01-01",
+      "effective_end_date": "2050-12-31"
+    }
+  },
+  {
+    "model":"part_management.User",
+    "fields": {
+      "user_code": "U4",
+      "user_name": "guest2",
+      "password": "pbkdf2_sha256$320000$UrxZ6VBeBfXew9XBhVJEEq$fVOVe2igCXMVnyLm4rCCTcLkhedc01zHvAXiGZdZ6bA=",
+      "dept_code": "D1",
+      "role": 1,
+      "effective_start_date":"2000-01-01",
+      "effective_end_date": "2012-12-31"
+    }
+  },
+  {
+    "model":"part_management.User",
+    "fields": {
+      "user_code": "U5",
+      "user_name": "guest3",
+      "password": "pbkdf2_sha256$320000$1VwdbhJBOCWvbInNH5SDTf$4I0FDrFds/uR8wR4P2XhHuIrWQ+ULUg3BBuOVApjQqA=",
+      "dept_code": "D1",
+      "role": 1,
+      "effective_start_date":"2050-01-01",
+      "effective_end_date": "2099-12-31"
+    }
+  },
+  {
+    "model":"part_management.User",
+    "fields": {
+      "user_code": "U6",
+      "user_name": "役割無効ユーザ",
+      "password": "pbkdf2_sha256$320000$vjvA2Q2Kt9R4FfCmorFNVO$oLEhGpkVDMR6d2defwI6LR1S4osziTmNeyGtxnCc594=",
+      "dept_code": "D1",
+      "role": 4,
+      "effective_start_date":"2016-01-01",
+      "effective_end_date": "2050-12-31"
+    }
+  }
+]

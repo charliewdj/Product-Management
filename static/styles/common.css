@@ -1,0 +1,68 @@
+th {
+	background-color: aqua;
+}
+
+.navbar {
+	min-height:24px !important;
+	border: solid 0;
+	padding:6px;
+	margin-bottom:5px;
+}
+
+.dropdown li {
+	list-style: none;
+	text-align: left;
+}
+
+.dropdown li a {
+	text-decoration:none;
+}
+
+.dropdown-menu li {
+	display: block;
+	float: none;
+	background: none;
+	padding:0;
+	width: auto;
+	text-align: left;
+}
+
+.dropdown-menu li:hover {
+	background:none
+}
+
+.dropdown-menu li a {
+	text-decoration: none;
+	color: #000
+}
+
+.jumbotron {
+	margin-bottom: 5px;
+	background-color: #CEE3F6;
+}
+
+.well {
+	text-align: center;
+	background: #CEE3F6;
+	border: #CEE3F6;
+}
+
+body, html  {
+	height: 100%;
+}
+
+#wrap {
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -45px;
+}
+
+#push,
+#footer {
+	height: 30px;
+}
+
+#allUncheck {
+	margin-right:10px;
+}

@@ -1,0 +1,9 @@
+{% extends 'part_management/base.html' %}
+{% block title %} ログインページからログインしてください {% endblock %}
+
+{% block content %}
+<div class="alert alert-danger">
+  ログインページからログインしてください。
+  <a href="{% url 'part_management:Login' %}">ログインページ</a>
+</div>
+{% endblock %}

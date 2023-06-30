@@ -1,0 +1,33 @@
+{% extends 'part_management/base.html' %}
+{% block title %} ログイン {% endblock %}
+
+{% block content %}
+<div class="panel panel-info">
+  <div class="panel-heading">ログイン</div>
+  <div class="panel-body">
+
+    <form action="{% url 'part_management:Login' %}" id="login_form" class="form-inline text-right" method="post">
+      {% csrf_token %}
+
+      <div class="form-group">
+        <input type="text" class="form-control" placeholder="ユーザーID" id="uid" name="uid" maxlength="10" />
+      </div>
+      <div class="form-group">
+        <input type="password" class="form-control" placeholder="パスワード" id="pass" name="pass" maxlength="50" />
+      </div>
+      <input type="submit" class="btn btn-primary" id="login_btn" value="ログイン" />
+      <input type="reset" value="クリア">
+    </form>
+
+
+    <br />
+
+    {% if error_message %}
+    <div class="alert alert-warning">
+      {{ error_message }}
+    </div>
+    {% endif %}
+
+  </div>
+</div>
+{% endblock %}
